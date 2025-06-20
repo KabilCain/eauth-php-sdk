@@ -54,7 +54,7 @@ if (isset($_POST['registerRequest'])) {
 }
 
 /* Upgrade request by the user. */
-if (isset($_POST['upgrade'])) {
+if (isset($_POST['upgradeAccount'])) {
     $userName = $_POST['accountToUpgrade'];
     $licenseKey = $_POST['keyToRedeem'];
     if ($eauthAPI->upgradeRequest($userName, $licenseKey)) {
@@ -67,7 +67,7 @@ if (isset($_POST['upgrade'])) {
 }
 
 /* Password reset request by the user.*/
-if (isset($_POST['reset'])) {
+if (isset($_POST['resetPassword'])) {
     $emailAddress = $_POST['emailaddress'];
     if ($eauthAPI->resetPasswordRequest($emailAddress)) {
         sayToUser("We have sent you an email. Please also check your spam folder.");
