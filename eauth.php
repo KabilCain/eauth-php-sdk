@@ -79,16 +79,6 @@ class EauthAPI
         $errorMessage = $errorTextMessage;
     }
     
-    function isPremium() {
-        $rank = $_SESSION['expire_date'];
-        if ($rank == "Lifetime" || strtotime(str_replace('/', '-', $rank)) > time()) {
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
-    
     function initRequest() {
         $postData = array(
             'type' => "init",
