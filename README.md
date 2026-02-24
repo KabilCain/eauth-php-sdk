@@ -27,6 +27,12 @@ function resetPasswordRequest($emailAddress);
 ```php
 function resetHWIDRequest($userName);
 ```
+```php
+function authMonitor();
+```
+```php
+function userMonitor();
+```
 
 Configuration
 -------------
