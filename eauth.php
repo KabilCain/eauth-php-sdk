@@ -54,7 +54,7 @@ class EauthAPI
     
     // Function to send POST request to Eauth
     function eauthRequest($request_data) {
-        $url = 'https://eauth.us.to/api/1.2/';
+        $url = 'https://eauth.us.to/api/1.3/';
         
         $headers = array(
             'Content-Type: application/json',
