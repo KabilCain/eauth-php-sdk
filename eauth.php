@@ -148,6 +148,7 @@ class EauthAPI
         $message = $dataArray['message'];
         
         if ($message == "login_success") {
+            $_SESSION['username'] = $userName;
             $_SESSION['hwid'] = $dataArray['hwid'];
             $_SESSION['rank'] = $dataArray['rank'];
             $_SESSION['register_date'] = $dataArray['register_date'];
@@ -396,6 +397,41 @@ class EauthAPI
             self::logEauthError(self::ALREADY_HWID_RESET);
             return false;
         }
+    }
+    
+    function authMonitor() {
+        $postData = array(
+            'type' => "auth_monitor",
+            'session_id' => $_SESSION['session_id'],
+            'pair' => self::generate_random_string()
+        );
+        
+        $dataArray = json_decode(self::eauthRequest($postData), true);
+        $message = $dataArray['message'];
+        
+        if ($message == "up") {
+            return true;
+        }
+        
+        return false;
+    }
+    
+    function userMonitor() {
+        $postData = array(
+            'type' => "user_monitor",
+            'session_id' => $_SESSION['session_id'],
+            'username' => $_SESSION['username'],
+            'pair' => self::generate_random_string()
+        );
+        
+        $dataArray = json_decode(self::eauthRequest($postData), true);
+        $message = $dataArray['message'];
+        
+        if ($message == "up") {
+            return true;
+        }
+        
+        return false;
     }
     
 }

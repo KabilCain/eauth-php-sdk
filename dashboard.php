@@ -1,23 +1,14 @@
 <?
 error_reporting(E_ERROR);
 
-/* To create an instance of a Eauth class. */
+/* Eauth implementation. */
 require './eauth.php';
-
-/* Check if user is already logged in or not. */
-if (!isset($_SESSION['expire_date'])) {
-  header("Location: index.php");
-  exit();
-}
-
-$current_time = time();
 
 /* To create an instance of a Eauth class. */
 $eauthAPI = new EauthAPI();
 
-/* Check to see if the session has been signed by this user. */
-/* It also check if 10 minutes have passed. You can freely change the duration to whatever your users can stay logged in for. */
-if ((!isset($_SESSION['session_id'])) || (($current_time - $_SESSION['start_time']) > 10 * 60)) {
+/* Check to see if the user is logged in. */
+if (!$eauthAPI->userMonitor()) {
     $eauthAPI->logoutRequest();
 }
 

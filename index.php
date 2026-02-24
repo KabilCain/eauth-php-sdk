@@ -7,15 +7,12 @@ require './eauth.php';
 /* To create an instance of a Eauth class. */
 $eauthAPI = new EauthAPI();
 
-$current_time = time();
-
-/* Check to see if the session has been signed by this user. */
-if ((!isset($_SESSION['session_id'])) || (($current_time - $_SESSION['start_time']) > 600)) {
+/* Check to see if the session has is valid or not. */
+if (!$eauthAPI->authMonitor()) {
     if (!$eauthAPI->initRequest()) {
         /* If there is problem it will alert the user. */
-        die("...");
+        die($errorMessage);
     }
-    $_SESSION['start_time'] = time();
 }
 
 /* You must edit this for sure. */
@@ -28,7 +25,6 @@ if (isset($_POST['loginRequest'])) {
     $userName = $_POST['username'];
     $passWord = $_POST['password'];
     if ($eauthAPI->loginRequest($userName, $passWord)) {
-        $_SESSION['username'] = $userName;
         header("Location: dashboard.php");
         exit();
     }
