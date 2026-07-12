@@ -58,7 +58,8 @@ class EauthAPI
         
         $headers = array(
             'Content-Type: application/json',
-            'User-Agent: ' . self::generate_Eauth_header(json_encode($request_data))
+            'User-Agent: ' . self::generate_Eauth_header(json_encode($request_data)),
+            'X-Real-IP: ' . $_SERVER['REMOTE_ADDR']
         );
         
         $ch = curl_init($url);
